@@ -190,7 +190,7 @@
     <intro inline-template>
       <transition name="intro">
         <div v-show="visible" id="intro">
-          <!--<img class="crowd" src="/images/home/crowd.png" alt="family guy crowd">-->
+          <!--<img class="crowd" src="images/home/crowd.png" alt="family guy crowd">-->
           <button class="audio-btn" :class="{'muted': app.isMuted}" @click="toggleAudio">
             <div class="masker">
               <i class="icon audio"></i>
@@ -198,7 +198,7 @@
           </button>
           <h1 id="preloader_img_2">{{ $t('head.title') }}</h1>
           <div class="btn-container"></div>
-          <img class="family-img" src="/images/home/intro-family.png" v-bind:alt="$t('ui-getstarted')">
+          <img class="family-img" src="images/home/intro-family.png" v-bind:alt="$t('ui-getstarted')">
           <custom-button class="start-btn" @click="clickCreate" color="orange" text-id="ui-getstarted"></custom-button>
         </div>
       </transition>
@@ -227,7 +227,7 @@
         <button class="share" @click="finish" :class="{'hidden': app.shareVisible || app.finishViewVisible}">
           <div></div>
           <div>
-            <img src="/images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
+            <img src="images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
             <p>{{ $t('ui-finish') }}</p>
             <i class="icon check"></i>
           </div>
@@ -262,7 +262,7 @@
               <button class="btn-new" @click="startOver">
                 <div></div>
                 <div>
-                  <img src="/images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
+                  <img src="images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
                   <div class="cont-txt">
                     <p>{{ $t('ui-new') }} </p>
                     <p class="icon-plus">+</p>
@@ -307,7 +307,7 @@
                     <button class="save" @click="save">
                       <div></div>
                       <div>
-                        <img src="/images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
+                        <img src="images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
                         <p>{{ $t('ui-save') }}</p>
                         <i class="icon save"></i>
                       </div>
@@ -349,7 +349,7 @@
               <button class="btn-new" @click="startOver">
                 <div></div>
                 <div>
-                  <img src="/images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
+                  <img src="images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
                   <div class="cont-txt">
                     <p>{{ $t('ui-new') }} </p>
                     <p class="icon-plus">+</p>
@@ -467,12 +467,12 @@
   <!-- <footer>
     <div class="left">
       <div class="legal-logos">
-        <img src="/images/legal/fox-logo.png">
+        <img src="images/legal/fox-logo.png">
       </div>
     </div>
     <div class="right">
       <div class="movie-rating">
-        <img class="movie-rating-image" src="/images/legal/not-yet-rated.png" alt="Not Yet Rated" width="100" >
+        <img class="movie-rating-image" src="images/legal/not-yet-rated.png" alt="Not Yet Rated" width="100" >
         <p class="rating-reasons">For rating reasons, go to<br>
           <a target="_blank" class="is-confirm-exit-link" href="http://www.mpaa.org/">mpaa.org</a>
           <a target="_blank" class="is-confirm-exit-link" href="http://filmratings.com/">filmratings.com</a>
