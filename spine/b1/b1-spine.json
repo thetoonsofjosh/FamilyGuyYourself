@@ -1,0 +1,52 @@
+{
+  "skeleton": {
+    "hash": "Rrd4dcalLpVpRgu8BO4aRRmo6Os",
+    "spine": "3.6.48",
+    "width": 350,
+    "height": 1046.5,
+    "images": "./large/"
+  },
+  "bones": [
+    { "name": "root" },
+    { "name": "b1-bottom", "parent": "root" },
+    { "name": "b1-eyes", "parent": "root" },
+    { "name": "b1-eyes-back", "parent": "root" },
+    { "name": "b1-hair", "parent": "root" },
+    { "name": "b1-hair-back", "parent": "root" },
+    { "name": "b1-head", "parent": "root" },
+    { "name": "b1-head-back", "parent": "root" },
+    { "name": "b1-mouth", "parent": "root" },
+    { "name": "b1-nose", "parent": "root" },
+    { "name": "b1-top", "parent": "root" },
+    { "name": "b1-top-back", "parent": "root" }
+  ],
+  "slots": [
+    { "name": "hair--back", "bone": "b1-hair-back", "attachment": "hair--back" },
+    { "name": "top--back", "bone": "b1-top-back", "attachment": "top--back" },
+    { "name": "bottom", "bone": "b1-bottom", "attachment": "bottom" },
+    { "name": "top", "bone": "b1-top", "attachment": "top" },
+    { "name": "head", "bone": "b1-head", "attachment": "head" },
+    { "name": "mouth", "bone": "b1-mouth", "attachment": "mouth" },
+    { "name": "head--back", "bone": "b1-head-back", "attachment": "head--back" },
+    { "name": "eyes--back", "bone": "b1-eyes-back", "attachment": "eyes--back" },
+    { "name": "hair", "bone": "b1-hair", "attachment": "hair" },
+    { "name": "eyes", "bone": "b1-eyes", "attachment": "eyes" },
+    { "name": "nose", "bone": "b1-nose", "attachment": "nose" }
+  ],
+  "skins": {
+    "default": {
+      "bottom": { "bottom": { "x": 91, "y": -252, "width": 340, "height": 865 } },
+      "eyes": { "eyes": { "x": 73, "y": 50, "width": 200, "height": 100 } },
+      "eyes--back": { "eyes--back": { "x": 73, "y": 50, "width": 200, "height": 100 } },
+      "hair--back": { "hair--back": { "x": 91, "y": -10, "width": 340, "height": 420 } },
+      "hair": { "hair": { "x": 91, "y": 162, "width": 340, "height": 400 } },
+      "head": { "head": { "x": 86, "y": 33.5, "width": 280, "height": 292 } },
+      "head--back": { "head--back": { "x": 86, "y": -65.14, "width": 280, "height": 488 } },
+      "mouth": { "mouth": { "x": 62, "y": -24, "width": 150, "height": 80 } },
+      "nose": { "nose": { "x": 55, "y": 38, "width": 160, "height": 108 } },
+      "top": { "top": { "x": 90, "y": -291, "width": 350, "height": 506 } },
+      "top--back": { "top--back": { "x": 1, "y": -291, "width": 172, "height": 506 } }
+    }
+  },
+  "animations": { "animation": {} }
+}
