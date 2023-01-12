@@ -1,0 +1,76 @@
+
+b3-spine.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bottom
+  rotate: false
+  xy: 2, 104
+  size: 340, 829
+  orig: 340, 829
+  offset: 0, 0
+  index: -1
+eyes
+  rotate: false
+  xy: 2, 2
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+eyes--back
+  rotate: false
+  xy: 1380, 659
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+hair
+  rotate: false
+  xy: 1038, 533
+  size: 340, 400
+  orig: 340, 400
+  offset: 0, 0
+  index: -1
+hair--back
+  rotate: false
+  xy: 696, 513
+  size: 340, 420
+  orig: 340, 420
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 344, 133
+  size: 280, 292
+  orig: 280, 292
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: false
+  xy: 696, 431
+  size: 137, 80
+  orig: 137, 80
+  offset: 0, 0
+  index: -1
+nose
+  rotate: true
+  xy: 1888, 773
+  size: 160, 108
+  orig: 160, 108
+  offset: 0, 0
+  index: -1
+top
+  rotate: false
+  xy: 344, 427
+  size: 350, 506
+  orig: 350, 506
+  offset: 0, 0
+  index: -1
+top--back
+  rotate: true
+  xy: 1380, 761
+  size: 172, 506
+  orig: 172, 506
+  offset: 0, 0
+  index: -1
