@@ -1,0 +1,549 @@
+
+<!doctype html>
+<!--[if lte IE 10]><html class="ie ie10below"><![endif]-->
+<!--[if gt IE 10]><html class="ie ie11above"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+  <title>Family Guy Yourself</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta id="meta_description" name="description">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39607501-29"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    // function gtag(){dataLayer.push(arguments);}
+    // gtag('js', new Date());
+    // gtag('config', 'UA-39607501-29');
+
+    function gtag(){
+      //quick fix to remove GA errors without hte source grunt file
+      return;
+    };
+  </script>
+  <!-- End Google Analytics -->
+
+  <link rel="stylesheet" href="styles/main.css" media="screen">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+
+  <meta id="meta_og_title" property="og:title" content="FAMILY GUY YOURSELF" />
+  <meta id="meta_og_description" property="og:description" content="Celebrate the 300th episode of “Family Guy” by creating your very own character! Tune in Sundays at 8/9c on FOX." />
+  <meta id="meta_og_site_name" property="og:site_name" content="Family Guy Yourself" />
+
+  <!-- social images -->
+  <meta property="og:image" content="http://www.familyguyyourself.com/images/social/default.jpg" />
+  <meta property="twitter:image:src" content="http://www.familyguyyourself.com/images/social/default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.familyguyyourself.com/" />
+  <meta property="fb:app_id" content="384468308648940" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="http://www.familyguyyourself.com/" />
+  <meta name="twitter:site" content="@familyguyonfox" />
+  <meta name="twitter:creator" content="@familyguyonfox" />
+  <meta id="meta_twitter_title" name="twitter:title" />
+  <meta id="meta_twitter_description" name="twitter:description" />
+
+  <meta name="google-site-verification" content="KOGnaOPrxpkonhKwF5Yg0SVL9eOFESm0pmM356GjZAc" />
+
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<!--   <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W368MM" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> -->
+  <!-- End Google Tag Manager (noscript) -->
+  <script>
+    window.FGY_CONFIG = {"locale":{"id":"en","path":"\/","file":"en-US","live":true},"fbAppId":"384468308648940"};
+  </script>
+  
+  <div id="root" :class="{'stageVisible':app.stageVisible}">
+    <transition name="fade">
+      <div id="menu-overlay" v-show="app.menuVisible"></div>
+    </transition>
+    <preloader inline-template>
+      <transition name="fade">
+        <div id="preloader" v-show="visible">
+          <div class="centered">
+            <img src="images/preloader/logo.png" alt="" class="logo">
+            <div class="inSign">
+              <div class="cont-loadbar">
+                <img class="lights-change lights-1" src="images/preloader/background-loader-1.png" alt="lights" class="lights-alternate">
+                <img class="lights-change lights-2" src="images/preloader/background-loader-2.png" alt="lights" class="lights-alternate">
+                <div class="loadBar">
+                  <div class="percentLoaded" :style="{'width': progress + '%'}"></div>
+                </div>
+              </div>
+              <div class="cont-txt">
+                <p class="txt active">Giggity</p>
+                <p class="txt" v-bind:class="{ active: progress > 25 }">Giggity</p>
+                <p class="txt" v-bind:class="{ active: progress > 50 }">Giggity</p>
+                <p class="txt" v-bind:class="{ active: progress > 75 }">Awwright!</p>
+              </div>
+            </div>
+          </div>
+          <div class="bkg"></div>
+        </div>
+      </transition>
+    </preloader>
+    <!-- TODO: enable this: button class="menuToggle" @click="showMenu"-->
+    <button class="menuToggle" v-show="app.showMenuToggle" @click="showMenu">
+      <div class="menuBurger"></div>
+    </button>
+    <main-menu inline-template>
+      <transition name="menuSlide">
+        <div id="mainMenu" v-show="app.menuVisible">
+          <div class="content">
+            <button class="close" @click="hide">
+              <i class="icon close"></i>
+            </button>
+            <button class="audio-btn" :class="{'muted': app.isMuted}" @click="toggleAudio">
+              <div class="masker">
+                <i class="icon audio"></i>
+              </div>
+            </button>
+            <img class="logo" width="280" height="auto" id="temp_logo_white">
+            <div class="cont-menu">
+              <ul>
+                <li v-show="app.hasAppStarted" class="first">
+                  <span @click="startOver">+ {{ $t('ui-newcharacter') }}</span>
+                </li>
+                <li class="first">
+                  <a :href="$t('head.theatrical_url')" @click="exitLinkClick('watchEpisodes')" target="_blank">{{ $t('ui-watchepisodes') }}</a>
+                </li>
+                <li class="second" v-if="$t('tickets_link') !== 'tickets_link'">
+                  <a :href="$t('tickets_link')" @click="exitLinkClick('setShowReminder', $event)" target="_blank">{{ $t('tickets') }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="social">
+              <p class="title" v-if="showSocial()">{{ $t('ui-follow') }}:</p>
+              <div class="cont-social-logos" v-if="showSocial()">
+                  <a id="facebook_link" v-if="showSocialByL10nName('head.facebook_username')" @click="socialClick('facebook')" class="first" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="46" height="45">
+                        <defs>
+                          <filter id="svgfacebook" x=".625" y="0" width="24.375" height="45" filterUnits="userSpaceOnUse">
+                            <feOffset result="offset" dx="2.828" dy="2.828" in="SourceAlpha" />
+                            <feGaussianBlur result="blur" />
+                            <feFlood result="flood" flood-opacity=".1" />
+                            <feComposite result="composite" operator="in" in2="blur" />
+                            <feBlend result="blend" in="SourceGraphic" />
+                          </filter>
+                        </defs>
+                        <path d="M5.875 14H.625v7h5.25v21h8.75V21H21l.627-7h-7v-2.917c0-1.672.336-2.333 1.951-2.333h5.049V0h-6.666C8.668 0 5.875 2.77 5.875 8.076V14z"
+                          fill="#fff" transform="translate(10,0)" fill-rule="evenodd" filter="url(#svgfacebook)" />
+                      </svg>
+
+                    </a>
+                    <a id="twitter_link" v-if="showSocialByL10nName('head.twitter_username')" @click="socialClick('twitter')" class="second" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="46" height="45">
+                        <defs>
+                          <filter id="svgtwitter" width="45.375" height="38.125" x=".625" y=".875" filterUnits="userSpaceOnUse">
+                            <feOffset dx="2.828" dy="2.828" in="SourceAlpha" result="offset" />
+                            <feGaussianBlur result="blur" />
+                            <feFlood flood-opacity=".1" result="flood" />
+                            <feComposite in2="blur" operator="in" result="composite" />
+                            <feBlend in="SourceGraphic" result="blend" />
+                          </filter>
+                        </defs>
+                        <path fill="#fff" fill-rule="evenodd" d="M42.625 4.993a16.907 16.907 0 0 1-4.949 1.387 8.8 8.8 0 0 0 3.789-4.88 17.068 17.068 0 0 1-5.473 2.139A8.513 8.513 0 0 0 29.7.86a8.776 8.776 0 0 0-8.394 10.823A24.282 24.282 0 0 1 3.55 2.473a8.951 8.951 0 0 0 2.665 11.77 8.434 8.434 0 0 1-3.9-1.1 8.78 8.78 0 0 0 6.91 8.755 8.459 8.459 0 0 1-3.892.15 8.651 8.651 0 0 0 8.051 6.121A17.046 17.046 0 0 1 .625 31.818a23.994 23.994 0 0 0 13.209 3.96c16 0 25.038-13.823 24.491-26.222a17.782 17.782 0 0 0 4.3-4.563z"
+                          filter="url(#svgtwitter)" />
+                      </svg>
+                    </a>
+                    <a id="instagram_link" v-if="showSocialByL10nName('head.instagram_username')" @click="socialClick('instagram')" class="second" target="_blank">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="46" height="45">
+                        <defs>
+                          <filter id="svginstagram" x=".375" y=".75" width="39.625" height="39.25" filterUnits="userSpaceOnUse">
+                            <feOffset result="offset" dx="2.828" dy="2.828" in="SourceAlpha" />
+                            <feGaussianBlur result="blur" />
+                            <feFlood result="flood" flood-opacity=".1" />
+                            <feComposite result="composite" operator="in" in2="blur" />
+                            <feBlend result="blend" in="SourceGraphic" />
+                          </filter>
+                        </defs>
+                        <path d="M18.375 3.994c4.806 0 5.375.018 7.275.1 4.879.222 7.156 2.537 7.379 7.379.087 1.9.1 2.467.1 7.273s-.018 5.376-.1 7.273c-.224 4.837-2.5 7.156-7.379 7.379-1.9.087-2.466.105-7.275.105S13 33.49 11.1 33.4c-4.89-.223-7.156-2.549-7.378-7.38-.087-1.9-.1-2.467-.1-7.273s.019-5.375.1-7.274C3.948 6.636 6.219 4.32 11.1 4.1c1.9-.087 2.47-.106 7.275-.106zm0-3.245c-4.889 0-5.5.021-7.421.108-6.536.3-10.17 3.927-10.47 10.47C.4 13.249.375 13.862.375 18.75s.021 5.5.108 7.422c.3 6.537 3.927 10.17 10.47 10.47 1.922.087 2.534.108 7.423.108s5.5-.021 7.422-.108c6.531-.3 10.173-3.927 10.468-10.47.089-1.92.11-2.533.11-7.422s-.021-5.5-.108-7.421C35.973 4.8 32.341 1.16 25.8.859 23.876.771 23.264.75 18.375.75zm0 8.757a9.244 9.244 0 1 0 9.242 9.243 9.243 9.243 0 0 0-9.242-9.242zm0 15.243a6 6 0 1 1 6-6 6 6 0 0 1-6 6.001zm9.609-17.766a2.16 2.16 0 1 0 2.158 2.16 2.161 2.161 0 0 0-2.158-2.16z"
+                          fill="#fff" fill-rule="evenodd" filter="url(#svginstagram)" />
+                      </svg>
+                    </a>
+              </div>
+              <div class="menu-legal">
+                <p v-html="$t('copyright')"></p>
+              </div>
+            </div>
+          </div>
+          <div class="bkg" @click="hide"></div>
+        </div>
+      </transition>
+    </main-menu>
+    <intro inline-template>
+      <transition name="intro">
+        <div v-show="visible" id="intro">
+          <!--<img class="crowd" src="/images/home/crowd.png" alt="family guy crowd">-->
+          <button class="audio-btn" :class="{'muted': app.isMuted}" @click="toggleAudio">
+            <div class="masker">
+              <i class="icon audio"></i>
+            </div>
+          </button>
+          <h1 id="preloader_img_2">{{ $t('head.title') }}</h1>
+          <div class="btn-container"></div>
+          <img class="family-img" src="/images/home/intro-family.png" v-bind:alt="$t('ui-getstarted')">
+          <custom-button class="start-btn" @click="clickCreate" color="orange" text-id="ui-getstarted"></custom-button>
+        </div>
+      </transition>
+    </intro>
+    <trailer inline-template>
+      <transition name="open">
+        <div id="trailer" v-show="app.trailerVisible">
+          <div class="content" :style="{'height': height + 'px', 'width': width + 'px', 'left': left + 'px', 'top': top + 'px'}">
+            <button class="close" @click="close">
+              <i class="icon close"></i>
+            </button>
+            <iframe v-if="doPlayVideo" ref="videoPlayer" width="100%" height="100%" :src="videoSrc" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="bkg" @click="close"></div>
+        </div>
+      </transition>
+    </trailer>
+    <new-character :show="app.showNewCharacterPopup" @onyes="onYesNewCharacterPopup" @oncancel="onCancelNewCharacterPopup" ></new-character>
+    <promo-popup :show="app.showPromoPopup" @onsuccess="onOkPromoPopup"></promo-popup>
+    <age-gate></age-gate>
+    <creator inline-template>
+      <div v-show="visible" id="creator" :class="{'stageVisible': app.stageVisible, 'finishVisible': app.finishViewVisible }">
+          <transition name="slide">
+            <h2 v-show="titleVisible" class="current-body-part">{{ $t(app.activeCategoryObj.label) }}</h2>
+          </transition>
+        <button class="share" @click="finish" :class="{'hidden': app.shareVisible || app.finishViewVisible}">
+          <div></div>
+          <div>
+            <img src="/images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
+            <p>{{ $t('ui-finish') }}</p>
+            <i class="icon check"></i>
+          </div>
+          <div></div>
+        </button>
+        <character-type-selector inline-template>
+          <transition name="slide">
+            <div v-show="app.characterSelectorVisible" id="characterTypeSelector">
+                <h3>
+                  <div class="character-selector-cta">{{ $t('section-body').toUpperCase() }}</div>
+                </h3>
+              <div class="centered">
+                <div class="characters">
+                  <div v-for="type in characterTypes" class="characterWrap">
+                    <div @click="selectCharacterType(type)" class="character" :style="{'background-image': 'url('+ type.selectScreenImage +')'}"></div>
+                  </div>
+                </div>
+                <button v-if="app.numSlottedCharacters > 0" @click="cancel" class="cancel">{{ $t('ui-cancel') }}</button>
+              </div>
+              <div class="bkg"></div>
+            </div>
+          </transition>
+        </character-type-selector>
+        <share inline-template>
+          <transition name="snap">
+            <div id="share" v-if="visible">
+              <h2 class="title">{{ $t('section-share') }}</h2>
+              <div class="shadow-text-title"></div>
+              <button class="menuToggle back-btn" @click="hide">
+                <i class="icon back"></i>
+              </button>
+              <button class="btn-new" @click="startOver">
+                <div></div>
+                <div>
+                  <img src="/images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
+                  <div class="cont-txt">
+                    <p>{{ $t('ui-new') }} </p>
+                    <p class="icon-plus">+</p>
+                  </div>
+                </div>
+                <div></div>
+              </button>
+              <div class="content">
+                <div class="controls controls--mobile">
+                  <div class="pagination"><p>{{currentFrame}}/{{scenes.length}}</p></div>
+                </div>
+                <slick ref="slick" :options="slickOptions" @swipe="onSwipe" @afterChange="onSwipe" @setPosition="onSwipe" @breakpoint="onSwipe">
+                  <div v-for="scene in scenes" class="mainWrapper">
+                    <div class="previewWrap" data-save-fragment="true" :style="getThumbStyle(scene)" :class="[frameClass]" :data-id="scene.id">
+                      <div class="polaroid">
+                        <img :src="characterData" :style="characterStyle" alt="your character" class="preview">
+                      </div>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </slick>
+                <div class="controls controls--desktop">
+                  <button class="back-button" @click="prevFrame"></button>
+                  <div class="pagination"><p>{{currentFrame}} / {{scenes.length}}</p></div>
+                  <button class="next-button" @click="nextFrame"></button>
+                </div>
+                <div v-if="isSaving" class="save-container">
+                  <div class="save-content" :style="downloadBackgroundStyles">
+                    <img :src="saveBackground" class="save-background">
+                    <img :src="characterData" :style="characterStyleDownload" alt="your character" class="save-character">
+                  </div>
+                </div>
+                <div class="share-container">
+                  <div class="share-content">
+                    <img :src="shareBackground" class="share-background">
+                    <img :src="characterData" :style="characterStyleShare"alt="your character" class="share-character">
+                  </div>
+                </div>
+              </div>
+              <div class="cont-bottom">
+                  <div class="footer-buttons-container">
+                    <button class="save" @click="save">
+                      <div></div>
+                      <div>
+                        <img src="/images/ui/buttons/green-btn-part-2.png" width="100%" height="72" alt="">
+                        <p>{{ $t('ui-save') }}</p>
+                        <i class="icon save"></i>
+                      </div>
+                      <div></div>
+                    </button>
+                    <button class="facebook-button" @click="shareFb"></button>
+                    <button class="twitter-button" @click="shareTw"></button>
+                  </div>
+              </div>
+            </div>
+          </transition>
+        </share>
+        <character-stage inline-template>
+          <div id="characterStage" ref="stage">
+            <div class="shadow-text-title"></div>
+            <div class="camera-wrapper" :style="getCanvasStyles">
+              <div class="bkg"></div>
+              <canvas id="characterStageCanvas" ref="canvas" :data-char-x="characterPosition.x" :data-char-y="characterPosition.y"></canvas>
+            </div>
+            <transition name="fade">
+              <footer id="footer-characterStage" v-show="app.stageVisible">
+                <div class="cont-footer-character">
+                  <div></div>
+                  <img class="left-logo" :src="$t('asset.intro_lockup_path')" alt="300th episode">
+                  <img class="right-logo" src="./images/legal/family-guy-logo.png" alt="Family Guy Yourself">
+                </div>
+              </footer>
+            </transition>
+          </div>
+        </character-stage>
+        <finish-view inline-template>
+          <transition name="slide">
+            <div id="finish" v-show="app.finishViewVisible">
+              <h2 class="title">{{ $t('section-format') }}</h2>
+              <div class="shadow-text-title"></div>
+              <button class="menuToggle back-btn" @click="hide">
+                <i class="icon back"></i>
+              </button>
+              <button class="btn-new" @click="startOver">
+                <div></div>
+                <div>
+                  <img src="/images/ui/buttons/orange-btn-part-2.png" width="100%" height="71" alt="">
+                  <div class="cont-txt">
+                    <p>{{ $t('ui-new') }} </p>
+                    <p class="icon-plus">+</p>
+                  </div>
+                </div>
+                <div></div>
+              </button>
+              <div class="cont-p">
+                <div v-for="format in formats" class="format">
+                  <p v-bind:class="{bottom: format.bottomName}">• {{format.name}} •</p>
+                  <img @click="selectScene(format.id)" :src="'images/format/format-'+format.id+'.png'" :alt="format.name">
+                </div>
+              </div>
+              <div class="cont-bottom">
+                <p>{{ $t('ui-selectformat') }}</p>
+              </div>
+            </div>
+          </transition>
+        </finish-view>
+        <scene-selector inline-template>
+          <transition name="slide">
+            <div id="sceneSelector" v-show="app.sceneSelectVisible">
+              <div class="title">{{ $t('select_scene_and_snap_your_photo') }}</div>
+              <button class="menuToggle back-btn" @click="hide">
+                <i class="icon back"></i>
+              </button>
+              <button class="takePhoto" @click="takePhoto">
+                <span>{{ $t('take_photo') }}</span>
+                <i class="icon camera"></i>
+              </button>
+              <div class="scroller">
+                <ul>
+                  <li v-for="(scene, sceneNum) in scenes" :class="{'active': scene.active, 'clear': scene.isClear}" @click="selectScene(scene)"
+                    :style="getThumbStyle(scene)"></li>
+                </ul>
+              </div>
+              <div class="bkg"></div>
+            </div>
+          </transition>
+        </scene-selector>
+        <parts-selector inline-template>
+          <transition name="slide">
+            <div id="partsSelector" v-show="visible" :class="{'expanded': expanded, 'color-active': app.colorPickerActive}">
+              <!-- <div class="title">{{categoryLabel}}</div> -->
+              <div id="colorSelector" @click="selectColor()" :class="{'active' : app.colorPickerActive, 'visible' : app.showColorPicker, 'expanded' : app.colorsExpanded}">
+                <div class="activeColor"></div>
+                <div id="buttonColorSelector">
+                  <div id="dropColor" :style="selectedColor"></div>
+                </div>
+              </div>
+              <items-carousel v-bind:items="categoryParts" v-bind:expanded="expanded" v-bind:visible="visible" v-on:expand-change="handleExpandChange">
+                <i slot="expand" class="expandy icon" @click="toggleExpand"></i>
+                <template slot-scope="props">
+                    <div :style="getPartStyle(props.item)" @click="selectPart(props.item, props.pageNum)" :class="{'big-icon': isBigIcon }"></div>
+                </template>
+              </items-carousel>
+            </div>
+          </transition>
+        </parts-selector>
+        <category-selector inline-template>
+          <transition name="slide">
+            <div id="categorySelector" v-show="app.showCategorySelector">
+              <div class="desktopScroller" ref="scrollingList">
+                <ul>
+                  <li v-for="category in categories" :class="{'active': category.active, 'visited':category.visited}">
+                    <button v-if="!category.visited || category.active" :class="category.key" :style="{'background-image': 'url('+ category[(category.active? 'iconActive' : 'icon')] +')'}"
+                      @click="selectCategory(category, $event)"></button>
+                    <button v-else :class="category.key" :style="{'background-image': 'url('+ category[(category.visited? 'iconVisited' : 'icon')] +')'}"
+                      @click="selectCategory(category, $event)"></button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </transition>
+        </category-selector>
+        <color-selector inline-template>
+          <div id="contColorSelector" :class="{hasPages : pages.length > 1, visible: app.colorPickerActive, expand: expand}">
+            <div id="buttonExpandColors" @click="expandColors()"></div>
+            <items-carousel v-bind:items="colors" v-bind:expanded="expand" v-bind:visible="visible" v-on:expand-change="handleExpandChange">
+              <template slot-scope="props">
+                <div class="color" @click="selectColor(props.item)" :class="{'active': props.item.active}" :style="{'background': props.item.hex, 'box-shadow': 'inset 0px 2px 0px 1px'+ props.item.hexl}"></div>
+              </template>
+            </items-carousel>
+          </div>
+        </color-selector>
+      </div>
+    </creator>
+    <mobile-rotate inline-template>
+      <div :class="{'visible': visible}" id="mobileRotate">
+        <header>
+          <div class="logo-rotate"></div>
+          <div class="logo-episodes"></div>
+        </header>
+        <div class="cont">
+          <img src="images/mobilerotate/chicken-fight.png" height="auto" alt="">
+          <div class="cont-txt">
+            <p class="txt-1">Nothing to see here folks.</p>
+            <p class="txt-2">Please Rotate Your Device</p>
+          </div>
+        </div>
+      </div>
+    </mobile-rotate>
+  </div>
+  <div id="ieUpgrade">
+    <div class="centered">
+      <div class="logoWrap">
+        <img id="temp_logo_black" width="300">
+      </div>
+      <strong>{{ $t('word.whoops') }}</strong>
+      <p style="width: 270px;margin: auto">{{ $t('please_upgrade_your_browser') }}</p>
+      <a href="https://www.google.com/chrome/" target="_blank">{{ $t('get_google_chrome') }}</a>
+
+    </div>
+  </div>
+  <!-- <footer>
+    <div class="left">
+      <div class="legal-logos">
+        <img src="/images/legal/fox-logo.png">
+      </div>
+    </div>
+    <div class="right">
+      <div class="movie-rating">
+        <img class="movie-rating-image" src="/images/legal/not-yet-rated.png" alt="Not Yet Rated" width="100" >
+        <p class="rating-reasons">For rating reasons, go to<br>
+          <a target="_blank" class="is-confirm-exit-link" href="http://www.mpaa.org/">mpaa.org</a>
+          <a target="_blank" class="is-confirm-exit-link" href="http://filmratings.com/">filmratings.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="center">
+      <div class="legal-text">
+        <script src="//www.foxprivacy.com/us-th/footer.js"
+        onload="
+          a = this.parentNode.getElementsByTagName( 'a' );
+          for( var i = 0, idur = a.length; i < idur ; i++ ){
+            a[i].setAttribute( 'class' , 'is-confirm-exit-link' )
+          }
+        "></script>
+        <span style="font-size:10px; line-height:normal;"></span>
+      </div>
+    </div>
+  </footer> -->
+  <!-- Shared components -->
+  <script type="text/x-template" id="custom-button">
+    <button class="custom-button" v-bind:class="color" @click="$emit('click', $event)">
+      <div></div>
+      <div>
+        <img v-bind:src="colorImage" width="100%" v-bind:height="height" alt="">
+        <p>{{ text }}</p>
+        <i v-if="icon" class="icon" v-bind:class="icon"></i>
+      </div>
+      <div></div>
+    </button>
+  </script>
+
+  <script type="text/x-template" id="items-carousel">
+    <div class="itemsCarouselContainer" v-bind:class="{hasPages : pages.length > 1, expanded: expanded }">
+      <button class="arrowLeft" v-show="doShowLeftArrow" @click="prevPage">
+        <i class="icon"></i>
+      </button>
+      <button class="arrowRight" v-show="doShowRightArrow" @click="nextPage">
+        <i class="icon"></i>
+      </button>
+      <slot name="expand"></slot>
+      <div class="itemsCarousel">
+        <div class="masker" ref="carouselMask">
+          <div class="hiddenPartSizer part" ref="hiddenPartSizer"></div>
+          <div class="scroller" ref="scroller" :style="{'left': (currPage * carouselWidth * -1) + 'px' }">
+            <div class="page" v-for="(parts, pageNum) in pages">
+              <div class="part" v-for="(part, index) in parts" :class="{'active': part.active, 'clear': part.isClear}">
+                <!--<div :style="getPartStyle(part)" @click="selectPart(part, pageNum)" :class="{'big-icon': isBigIcon }"></div>-->
+                <slot v-bind:index="index" v-bind:item="part" v-bind:page-num= "pageNum"></slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="indicators">
+        <ul>
+          <li v-for="(page, pageNum) in pages" :class="{'active': currPage === pageNum}" @click="selectPage(pageNum)"></li>
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <script src="scripts/main.js"></script>
+  <script>
+    var j = document.createElement('script'),
+      f = document.getElementsByTagName('script')[0];
+    j.src = '//www.youtube.com/iframe_api';
+    j.async = true;
+    f.parentNode.insertBefore(j, f);
+  </script>
+  
+</body>
+
+</html>
