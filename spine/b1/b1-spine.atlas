@@ -1,0 +1,83 @@
+
+b1-spine.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bottom
+  rotate: false
+  xy: 2, 104
+  size: 340, 865
+  orig: 340, 865
+  offset: 0, 0
+  index: -1
+eyes
+  rotate: false
+  xy: 2, 2
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+eyes--back
+  rotate: false
+  xy: 1836, 869
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+hair
+  rotate: false
+  xy: 1320, 569
+  size: 340, 400
+  orig: 340, 400
+  offset: 0, 0
+  index: -1
+hair--back
+  rotate: false
+  xy: 978, 549
+  size: 340, 420
+  orig: 340, 420
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 344, 169
+  size: 280, 292
+  orig: 280, 292
+  offset: 0, 0
+  index: -1
+head--back
+  rotate: false
+  xy: 696, 481
+  size: 280, 488
+  orig: 280, 488
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: false
+  xy: 1836, 677
+  size: 150, 80
+  orig: 150, 80
+  offset: 0, 0
+  index: -1
+nose
+  rotate: false
+  xy: 1836, 759
+  size: 160, 108
+  orig: 160, 108
+  offset: 0, 0
+  index: -1
+top
+  rotate: false
+  xy: 344, 463
+  size: 350, 506
+  orig: 350, 506
+  offset: 0, 0
+  index: -1
+top--back
+  rotate: false
+  xy: 1662, 463
+  size: 172, 506
+  orig: 172, 506
+  offset: 0, 0
+  index: -1
